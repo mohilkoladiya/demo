@@ -42,7 +42,7 @@ export default function Dashbord() {
                                             <img
                                                 alt="example"
                                                 onClick={()      => { onBlogClickHandler(item) }}
-                                                src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                                                src={"http://192.168.1.117:3000"+'/' + item.blogImagePath} 
                                             />
                                         }
                                         actions={[

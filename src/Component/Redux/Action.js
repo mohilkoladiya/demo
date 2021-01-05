@@ -27,7 +27,7 @@ export const fetchUser = (values, props) => {
     console.log("callwed");
     return (dispatch) => {
         dispatch(userRequest())
-        axios.post('https://node-demox.herokuapp.com/api/signIn', values)
+        axios.post('http://192.168.1.117:3000/api/signIn', values)
             .then(response => {
                 console.log(response);
                 const data = response.data
@@ -73,7 +73,7 @@ export const getcountry = () => {
     return (dispatch) => {
         dispatch(countryRequest());
         axios
-            .get(`https://node-demox.herokuapp.com/api/getAllCountry`)
+            .get(`http://192.168.1.117:3000/api/getAllCountry`)
             .then((Response) => {
                 const country = Response.data.countryList;
                 dispatch(countrySuccess(country));
@@ -109,7 +109,7 @@ export const getState = (countryId) => {
     return (dispatch) => {
         dispatch(stateReuest());
         axios
-            .get(`https://node-demox.herokuapp.com/api/getStateById/${countryId}`)
+            .get(`http://192.168.1.117:3000/api/getStateById/${countryId}`)
             .then((Response) => {
                 const state = Response.data.stateList;
                 dispatch(stateSuccess(state));
@@ -143,7 +143,7 @@ export const SendingLoginRequest = (data, props) => {
     return (dispatch) => {
         dispatch(loginRequest());
         axios
-            .post(`https://node-demox.herokuapp.com/api/login`, data)
+            .post(`http://192.168.1.117:3000/api/login`, data)
             .then((Response) => {
                 console.log(Response);
                 const data = Response.data
@@ -195,7 +195,7 @@ export const changePassword = (change, onSubmitProps) => {
 
     return (dispatch) => {
         dispatch(changePasswordRequest())
-        axios.put(`https://node-demox.herokuapp.com/api/changePassword`, change,
+        axios.put(`http://192.168.1.117:3000/api/changePassword`, change,
             {
                 headers: {
                     'Authorization': token,
@@ -250,11 +250,11 @@ export const createBlog = (blog, onSubmitProps) => {
     let token = JSON.parse(localStorage.getItem('loginToken'))
     return (dispatch) => {
         dispatch(createBlogRequest())
-        axios.post(`https://node-demox.herokuapp.com/api/createBlog`, blog,
+        axios.post(`http://192.168.1.117:3000/api/createBlog`, blog,
             {
                 headers: {
                     'Authorization': token,
-                    'content-type': "application/json"
+                    'content-type': "multipart/form-data"
                 }
             })
             .then((Response) => {
@@ -303,7 +303,7 @@ export const getAllBlog = () => {
 
     return (dispatch) => {
         dispatch(getAllBlogRequest())
-        axios.get(`https://node-demox.herokuapp.com/api/getAllBlog`)
+        axios.get(`http://192.168.1.117:3000/api/getAllBlog`)
             .then((Response) => {
                 console.log(Response);
                 const blog = Response.data
@@ -346,7 +346,7 @@ export const getBlogById = () => {
     let token = JSON.parse(localStorage.getItem('loginToken'))
     return (dispatch) => {
         dispatch(getBlogByIdRequest())
-        axios.get(`https://node-demox.herokuapp.com/api/getBlogById`,
+        axios.get(`http://192.168.1.117:3000/api/getBlogById`,
             {
                 headers: {
                     'Authorization': token,
@@ -391,7 +391,7 @@ export const deleteBlog = (deleteId) => {
     let token = JSON.parse(localStorage.getItem('loginToken'))
     return (dispatch) => {
         dispatch(deleteBlogRequest())
-        axios.delete(`https://node-demox.herokuapp.com/api/deleteBlog/${deleteId}`,
+        axios.delete(`http://192.168.1.117:3000/api/deleteBlog/${deleteId}`,
             {
                 headers: {
                     'Authorization': token,
@@ -444,7 +444,7 @@ export const forgetPasswordError = (error) => {
 export const forgetPassword = (email) => {
     return (dispatch) => {
         dispatch(forgetPasswordRequest())
-        axios.post(`https://node-demox.herokuapp.com/api/forgetPassword`, email)
+        axios.post(`http://192.168.1.117:3000/api/forgetPassword`, email)
             .then((Response) => {
                 const email = Response.data
                 dispatch(forgetPasswordSuccess(email))
@@ -486,7 +486,7 @@ export const newPasswordError = (error) => {
 export const newPassword = (data) => {
     return (dispatch) => {
         dispatch(newPasswordrequest())
-        axios.post(`https://node-demox.herokuapp.com/api/resetPassword`, data)
+        axios.post(`http://192.168.1.117:3000/api/resetPassword`, data)
             .then((Response) => {
                 const data = Response.data
                 dispatch(newPasswordSuccess(data))
@@ -528,7 +528,7 @@ export const contactusError = (error) => {
 export const sendMessage = (message) => {
     return (dispatch) => {
         dispatch(contactusRequest())
-        axios.post(`https://node-demox.herokuapp.com/api/contactUs`, message)
+        axios.post(`http://192.168.1.117:3000/api/contactUs`, message)
             .then((Response) => {
                 const message = Response.data
                 dispatch(contactusSuccess(message))

@@ -1,5 +1,5 @@
 import { Form, Formik } from 'formik'
-import React from 'react'
+import React, { useState } from 'react'
 import * as Yup from 'yup'
 import Formikcontrol from '../Formik/Formikcontrol'
 import { useHistory } from 'react-router-dom'
@@ -8,11 +8,12 @@ import Button from 'react-bootstrap/Button'
 import { createBlog } from '../Redux/Action'
 
 export default function Createblog(props) {
+    const [selectedFile, setselectedFile] = useState()
     const initialValues = {
         blogTitle: '',
-        blogContent: ''
+        blogContent: '',
+        file: selectedFile
     }
-
     let history = useHistory()
     let dispatch = useDispatch()
 
@@ -20,9 +21,15 @@ export default function Createblog(props) {
         blogTitle: Yup.string().required('Title is required'),
         blogContent: Yup.string().required("Please enter blog details")
     })
-
-    const onSubmit = (values , onSubmitProps) => {
-        dispatch(createBlog(values, onSubmitProps))
+    const onFileChange = event => {
+        setselectedFile(event.target.files[0]);
+    };
+    const onSubmit = (values, onSubmitProps) => {
+        var testData = new FormData()
+        testData.append("blogTitle", values.blogTitle)
+        testData.append("blogContent", values.blogContent)
+        testData.append("file", selectedFile)
+        dispatch(createBlog(testData, onSubmitProps))
         setTimeout(() => {
             history.push("/dash")
         }, 2000);
@@ -52,7 +59,14 @@ export default function Createblog(props) {
                                                     placeholder="Enter blog details"
                                                     className="form-control"
                                                     control="textarea"
-                                                    name="blogContent" /><br />
+                                                    name="blogContent" />
+                                            </div>
+                                            <div>
+                                                <Formikcontrol
+                                                    control="input"
+                                                    name="file"
+                                                    type="file"
+                                                    onChange={(e) => onFileChange(e)} /><br />
                                             </div>
                                             <Button className="Resetbtn" type="submit" >Create</Button>
                                         </Form>

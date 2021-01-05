@@ -17,7 +17,6 @@ import { LikeOutlined, DislikeOutlined, CommentOutlined } from '@ant-design/icon
 export default function Home() {
     const [index, setIndex] = useState(0)
     const history = useHistory()
-
     const dispatch = useDispatch()
 
     const handleSelect = (selectedIndex, e) => {
@@ -33,6 +32,9 @@ export default function Home() {
     }
     const Blog = useSelector(state => state.getAllBlog.Blogs.blogList)
 
+    const loginHandler = () => {
+        history.push("/login")
+    }
     return (
         <>
             <Layout>
@@ -75,12 +77,12 @@ export default function Home() {
                     </Carousel.Item>
                 </Carousel>
             </Layout>
-            <div style={{padding:"10px"}}>
+            <div style={{ padding: "10px" }}>
                 <Row gutter={8}>
                     {
                         Blog && Blog.map((item, i) => {
                             return (
-                                <Col span={4} style={{paddingBottom:"16px"}}>
+                                <Col span={4} style={{ paddingBottom: "16px" }}>
                                     <Card key={i}
                                         style={{ width: 300 }}
                                         cover={
@@ -90,13 +92,13 @@ export default function Home() {
                                             />
                                         }
                                         actions={[
-                                            <LikeOutlined />,
-                                            <DislikeOutlined />,
-                                            <CommentOutlined />,
+                                            <LikeOutlined onClick={() => { loginHandler() }} />,
+                                            <DislikeOutlined onClick={() => { loginHandler() }} />,
+                                            <CommentOutlined onClick={() => { loginHandler() }} />,
                                         ]}
                                     >
-                                        <Meta 
-                                        className="Blog"
+                                        <Meta
+                                            className="Blog"
                                             avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
                                             title={item.blogTitle}
                                             description={item.blogContent}
