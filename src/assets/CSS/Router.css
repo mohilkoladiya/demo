@@ -1,0 +1,32 @@
+.mainContent{
+     width: 100%;
+     display: flex;
+     align-items: center;
+     /* height: 100vh; */
+     overflow: hidden;
+  
+}
+
+.sidebar{
+    width: 16%;
+}
+.sidebar-inside{
+    position: fixed;
+    top: 64px;
+
+}
+.content{
+width: 100%;
+min-height: 100vh;
+padding-top:16px;
+margin-left: -90px;
+}
+
+.fullContent{
+width: 100%;
+min-height: 100vh;
+}
+
+.fullContent .custom-switch{
+ padding-left: 0px;
+}

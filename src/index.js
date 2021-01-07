@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'antd/dist/antd.css';
-import './Component/CSS/index.css';
-import App from './Component/App';
+import './assets/CSS/index.css';
 import reportWebVitals from './reportWebVitals';
 import 'react-toastify/dist/ReactToastify.css';
+import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
