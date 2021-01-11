@@ -14,6 +14,7 @@ export default function Createblog(props) {
         blogContent: '',
         file: selectedFile
     }
+
     let history = useHistory()
     let dispatch = useDispatch()
 
@@ -21,9 +22,11 @@ export default function Createblog(props) {
         blogTitle: Yup.string().required('Title is required'),
         blogContent: Yup.string().required("Please enter blog details")
     })
+
     const onFileChange = event => {
         setselectedFile(event.target.files[0]);
     };
+    
     const onSubmit = (values, onSubmitProps) => {
         var testData = new FormData()
         testData.append("blogTitle", values.blogTitle)
@@ -61,7 +64,7 @@ export default function Createblog(props) {
                                                     control="textarea"
                                                     name="blogContent" />
                                             </div>
-                                            <div>
+                                            <div style={{marginLeft:"14px"}}>
                                                 <Formikcontrol
                                                     control="input"
                                                     name="file"

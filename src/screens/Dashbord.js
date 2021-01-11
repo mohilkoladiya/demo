@@ -2,7 +2,6 @@ import { Card, Col, Row } from 'antd'
 import React, { useEffect } from 'react'
 import { LikeOutlined, DislikeOutlined, CommentOutlined, DeleteOutlined } from '@ant-design/icons';
 import Meta from 'antd/lib/card/Meta';
-import Avatar from 'antd/lib/avatar/avatar';
 import Button from 'react-bootstrap/Button'
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,13 +28,14 @@ export default function Dashbord() {
     }
     return (
         <div>
-            <Button style={{ float: "right" }} variant="info" onClick={() => { createBlogHandler() }}>Create blog</Button>
+            <Button style={{ float: "right", marginRight: "14px" }}
+                variant="info" onClick={() => { createBlogHandler() }}>Create blog</Button>
             <div>
-                <Row gutter={10}>
+                <Row gutter={12}>
                     {
                         blogById && blogById.map((item, i) => {
                             return (
-                                <Col span={5}>
+                                <Col span={6}>
                                     <Card key={i}
                                         style={{ width: 300 }}
                                         cover={

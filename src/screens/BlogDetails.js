@@ -10,18 +10,18 @@ import { Form, Formik } from 'formik';
 import Formikcontrol from '../components/Formik/Formikcontrol'
 import { sendComment, sendDislike, sendLike } from '../action/Action';
 
-
 export default function BlogDetails() {
     const initialValues = {
         blogComment: ""
     }
-    const [status, setStatus] = useState(false)
 
+    const [status, setStatus] = useState(false)
     const post = useSelector(state => { return state.activePost.currentPost });
 
     const commentHandler = () => {
         setStatus(!status)
     }
+
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -33,6 +33,10 @@ export default function BlogDetails() {
             history.push("/dash")
         }, 1000);
     }
+    const blogLike = () => {
+        dispatch(sendLike(blog_id))
+    }
+    
     const blog_id = post && post._id && post._id
     const likes = post && post.blogLike && post.blogLike.length
     const disLikes = post && post.blogDislike && post.blogDislike.length
@@ -55,7 +59,7 @@ export default function BlogDetails() {
 
                         actions={[
                             <div>
-                                <LikeOutlined onClick={() => dispatch(sendLike(blog_id))} />
+                                <LikeOutlined onClick={() => blogLike()} />
                                 <div>{likes}</div>
                             </div>,
                             <div>

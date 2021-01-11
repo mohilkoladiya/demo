@@ -30,7 +30,7 @@ export class Sidebar extends Component {
 
                             <Menu.Item key="2" icon={<UserOutlined />}><Link to="/profile" />Profile</Menu.Item>
 
-                            <Menu.Item key="4" icon={<TableOutlined />}>Table</Menu.Item>
+                            <Menu.Item key="4" icon={<TableOutlined />}><Link to="/table"/>Table</Menu.Item>
                         </Menu>
                     </Sider>
 

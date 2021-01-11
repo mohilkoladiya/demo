@@ -2,10 +2,12 @@ import { Card, Col, Row } from 'antd'
 import Avatar from 'antd/lib/avatar/avatar'
 import Meta from 'antd/lib/card/Meta'
 import React, { useEffect } from 'react'
-import { LikeOutlined, DislikeOutlined, CommentOutlined, DeleteOutlined } from '@ant-design/icons';
+import { DownloadOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteBlog, getAllBlog, setActivePost } from '../action/Action';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import Button from 'react-bootstrap/Button'
 
 
 export default function Allblog() {
@@ -15,21 +17,36 @@ export default function Allblog() {
     }, [])
 
     const Blog = useSelector(state => state.getAllBlog.Blogs.blogList);
-
+    console.log("blog", Blog);
     const history = useHistory()
     const blogDetailsHandler = (item) => {
         console.log("item", item);
         dispatch(setActivePost(item));
         history.push("/blog-detail")
     }
+
+    const imageDownload = (blogImage) => {
+        axios({
+            url: `http://192.168.1.117:3000/download/${blogImage}`,
+            method: 'GET',
+            responseType: 'blob', // important
+        }).then((response) => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'file.jpg');
+            document.body.appendChild(link);
+            link.click();
+        });
+    }
     return (
         <div>
             <div style={{ padding: "10px" }}>
-                <Row gutter={12}>
+                <Row gutter={35}>
                     {
                         Blog && Blog.map((item, i) => {
                             return (
-                                <Col span={6} style={{ paddingBottom: "16px" }}>
+                                <Col span={4.5} style={{ paddingBottom: "16px" }}>
                                     <Card key={i}
                                         style={{ width: 300 }}
                                         cover={
@@ -40,11 +57,11 @@ export default function Allblog() {
                                                 onClick={() => { blogDetailsHandler(item) }}
                                             />
                                         }
-                                    // actions={[
-                                    //     <LikeOutlined />,
-                                    //     <DislikeOutlined />,
-                                    //     <CommentOutlined />,
-                                    // ]}
+                                        actions={[
+                                            <Button>
+                                                <DownloadOutlined onClick={() => { imageDownload(item.blogImagePath) }} />
+                                            </Button>
+                                        ]}
                                     >
                                         <Meta
                                             className="Blog"

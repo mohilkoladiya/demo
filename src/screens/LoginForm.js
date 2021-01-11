@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom'
 import "../assets/CSS/Loginform.css"
 import { SendingLoginRequest } from '../action/Action'
 import { useDispatch } from 'react-redux'
+import { isAuthenticated } from '../router/PrivateRouter/Auth'
 
 export default function Loginform(props) {
     const initialValues = {
@@ -16,6 +17,9 @@ export default function Loginform(props) {
     let dispatch = useDispatch()
     const signupHandler = () => {
         history.push("/RegistrationForm")
+    }
+    if(isAuthenticated()!==false){
+        history.push("/dash")
     }
 
     const validationSchema = Yup.object({

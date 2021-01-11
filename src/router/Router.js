@@ -19,6 +19,7 @@ import Newpassword from '../screens/NewPassword'
 import BlogDetails from '../screens/BlogDetails'
 import Fotter from '../components/Fotter'
 import Allblog from '../screens/AllBlog'
+import DataTable from '../screens/Table'
 
 function Router1() {
     const isLoggin = localStorage.getItem("loginToken")
@@ -51,8 +52,9 @@ function Router1() {
                                 <PrivateRouter exact path="/blog" component={CreateBlog} />
                                 <PrivateRouter exact path="/blog-detail" component={BlogDetails} />
                                 <PrivateRouter exact path="/all-blog" component={Allblog} />
+                                <PrivateRouter exact path="/table" component={DataTable} />
                             </Switch>
-                            
+
                         </div>
                     </div>
                     <Fotter />
