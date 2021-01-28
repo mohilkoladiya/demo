@@ -12,9 +12,11 @@ export default function Dashbord() {
     const dispatch = useDispatch()
 
     const blogById = useSelector(state => state.getBlogById.blogById.blog)
+
     useEffect(() => {
         dispatch(getBlogById())
     }, [])
+    
     const createBlogHandler = () => {
         history.push("/blog")
     }
